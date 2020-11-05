@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ringing</title>
+    <style>
+        .pc-button {
+            display: -ms-inline-flexbox;
+            display: inline-flex;
+            -ms-flex-align: center;
+            align-items: center;
+            -ms-flex-pack: center;
+            justify-content: center;
+            box-sizing: border-box;
+            padding: 12px 16px;
+            /* width: 100px; */
+            height: 40px;
+            font-size: 14px;
+            font-weight: 500;
+            border-radius: 4px;
+            border: 1px solid transparent;
+            cursor: pointer;
+            transition: opacity .3s;
+            -webkit-user-select: none;
+            -moz-user-select: none;
+            -ms-user-select: none;
+            user-select: none;
+        }
+
+        .pc-button.plain {
+            background: #fff;
+            border: 1px solid #1876ff;
+            color: #1876ff;
+        }
+
+        .ringing-slot {
+            border-width: 0 2px 0 2px;
+            border-style: solid;
+            border-color: #1876ff;
+            padding: 0 5px;
+            display: flex;
+            align-items: center;
+            border-radius: 3px;
+            /* border-radius: 20%; */
+            /* animation: ringing-padding 1s infinite; */
+        }
+
+        .ringing-slot.outter {
+            height: 30px;
+            animation: outter 1.5s infinite forwards ease;
+        }
+        .ringing-slot.middle {
+            height: 25px;
+            animation: middle 1.5s infinite forwards ease;
+        }
+        .ringing-slot.inner {
+            animation: inner 1.5s infinite forwards ease;
+        }
+
+        @keyframes inner {
+            25% {
+                border-color: transparent;
+            }
+            100% {
+                border-color: #1876ff;
+            }
+            
+        }
+        @keyframes middle {
+            50% {
+                border-color: transparent;
+            }
+            100% {
+                border-color: #1876ff;
+            }
+        }
+
+        @keyframes outter {
+            75% {
+                border-color: transparent;
+            }
+            100% {
+                border-color: #1876ff;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="pc-button plain">
+        <div class="ringing-slot outter">
+            <div class="ringing-slot middle">
+                <div class="ringing-slot inner">接听</div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
