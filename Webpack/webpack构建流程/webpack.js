@@ -3,7 +3,6 @@ const path = require('path');
 const parser = require('@babel/parser');
 const traverse = require('@babel/traverse').default;
 const babel = require('@babel/core');
-const { create } = require('domain');
 
 
 let mouduleId = 0;
