@@ -1,2 +1,6 @@
 {
+    "compilerOptions": {
+        "allowJs": false,
+        "outDir": "js"
+    }
 }
