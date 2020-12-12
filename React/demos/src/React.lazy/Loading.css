@@ -1,0 +1,18 @@
+@keyframes loading {
+    from {
+        content: '.';
+    }
+
+    50% {
+        content: '..';
+    }
+
+    to {
+        content: '...';
+    }
+}
+.suspense-loading-name::after {
+    display: inline-block;
+    content: '.';
+    animation: loading infinite linear 1s;
+}
