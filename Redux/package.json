@@ -1,0 +1,16 @@
+{
+  "name": "redux-diy",
+  "version": "1.0.0",
+  "description": "Write Redux DIM",
+  "main": "./lib/index.js",
+  "repository": "https://www.github.com/kvsur",
+  "author": "kvsur",
+  "license": "MIT",
+  "private": false,
+  "scripts": {
+    "build": "tsc && node lib/index.js"
+  },
+  "devDependencies": {
+    "typescript": "^4.1.3"
+  }
+}
