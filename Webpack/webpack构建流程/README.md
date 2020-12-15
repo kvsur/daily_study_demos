@@ -5,7 +5,7 @@
 2. 逐层识别模块依赖（包括CommonJs、AMD、ES6 的 import 都会被识别和分析）；
 3. 最后输出打包后的代码；
 
-**2. webpack 构建远离**
+**2. webpack 构建原理**
 1. 初始化参数；
 
 解析webpack 配置参数，合并shell传入和webpack.config.js  文件配置的参数，merge 为最后的配置对象；

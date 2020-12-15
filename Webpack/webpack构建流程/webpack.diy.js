@@ -92,11 +92,6 @@ function bundle(graph = []) {
 }
 
 function createDist(result) {
-    fs.rmdirSync('./dist', {
-        recursive: true,
-    });
-    fs.mkdirSync('./dist');
-
     fs.writeFileSync('./dist/index.js', result, {
         encoding: 'utf-8',
     })
