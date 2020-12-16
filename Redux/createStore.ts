@@ -1,13 +1,17 @@
+import { RCSF } from "./applyMiddleware";
 import { Reducer } from "./combineReducers";
 
 export interface State {
     [x: string]: any;
 }
 
+export type Dispatch = (action: Action) => void;
+
 export interface Store {
     subscribe: (listener: Fn) => void;
-    dispatch: (action: Action) => void;
+    dispatch: Dispatch;
     getState: () => State;
+    replaceReducer: (newReducer: Reducer) => void;
 }
 
 
@@ -16,10 +20,21 @@ export interface Action {
     [x: string]: any
 }
 
+export type CreateStore = (reducer: Reducer, initState?: State, rewriteCreateStoreFn?: RCSF) => Store;
+
 export type Fn = () => void;
-export function createStore(reducer: Reducer ,initState?: State): Store {
+export const createStore: CreateStore = function (reducer ,initState, rewriteCreateStoreFn): Store {
+    if (typeof initState === 'function') {
+        rewriteCreateStoreFn = <RCSF>initState;
+        initState = undefined;
+    }
+    if (rewriteCreateStoreFn) {
+        const newCreateStore = rewriteCreateStoreFn(createStore);
+        return newCreateStore(reducer, initState);
+    }
+
     let state = initState;
-    let listeners: Array<Fn> = [];
+    let listeners: Fn[] = [];
 
     function subscribe(listener: Fn) {
         listeners.push(listener);
@@ -44,11 +59,17 @@ export function createStore(reducer: Reducer ,initState?: State): Store {
         return state;
     }
 
+    function replaceReducer(newReducer: Reducer) {
+        reducer = newReducer;
+        dispatch({ type: Symbol() });
+    }
+
     dispatch({ type: Symbol() });
 
     return {
         subscribe,
         getState,
-        dispatch
+        dispatch,
+        replaceReducer
     };
 }
