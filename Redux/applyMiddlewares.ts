@@ -1,8 +1,4 @@
-import { Reducers } from "./combineReducers";
-import { Action, CreateStore, Dispatch, State, Store } from "./createStore";
-
-export type Middleware = (store: Partial<Store>) => (next: Dispatch) => (action: Action) => void;
-export type RCSF = (oldCreateStore: CreateStore) => CreateStore;
+import { CreateStore, Middleware, RCSF } from "./define";
 
 export const applyMiddlewares = (...middlewares: Middleware[]) => {
 

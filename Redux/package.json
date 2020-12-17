@@ -8,9 +8,12 @@
   "license": "MIT",
   "private": false,
   "scripts": {
-    "build": "tsc && node lib/index.js"
+    "build": "tsc",
+    "start": "node test/index.js"
   },
+  "types": "lib/types",
   "devDependencies": {
     "typescript": "^4.1.3"
-  }
+  },
+  "dependencies": {}
 }

@@ -1,28 +1,5 @@
-import { RCSF } from "./applyMiddleware";
-import { Reducer } from "./combineReducers";
+import { CreateStore, Store, RCSF, Fn, Action, State, Reducer } from "./define";
 
-export interface State {
-    [x: string]: any;
-}
-
-export type Dispatch = (action: Action) => void;
-
-export interface Store {
-    subscribe: (listener: Fn) => void;
-    dispatch: Dispatch;
-    getState: () => State;
-    replaceReducer: (newReducer: Reducer) => void;
-}
-
-
-export interface Action {
-    type: string | symbol;
-    [x: string]: any
-}
-
-export type CreateStore = (reducer: Reducer, initState?: State, rewriteCreateStoreFn?: RCSF) => Store;
-
-export type Fn = () => void;
 export const createStore: CreateStore = function (reducer ,initState, rewriteCreateStoreFn): Store {
     if (typeof initState === 'function') {
         rewriteCreateStoreFn = <RCSF>initState;

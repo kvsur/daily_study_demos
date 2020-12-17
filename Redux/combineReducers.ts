@@ -1,10 +1,4 @@
-import { Action, State } from "./createStore";
-
-export type Reducer = (state: State, action: Action) => State;
-
-export interface Reducers {
-    [x: string]: Reducer;
-}
+import { Action, Reducer, Reducers, State } from "./define";
 
 export function combineReducers(reducers: Reducers): Reducer {
     const keys = Object.keys(reducers);

@@ -1,12 +1,4 @@
-import { Action, Dispatch } from "./createStore";
-
-export type ActionCreator = (...args: any[]) => Action;
-export interface ActionCreators {
-    [x: string]: ActionCreator
-};
-export interface BoundActionCreators {
-    [x: string]: Function;
-};
+import { ActionCreator, ActionCreators, BoundActionCreators, Dispatch } from "./define";
 
 function bindActionCreator(actionCreator: ActionCreator, dispatch: Dispatch) {
     return function() {
