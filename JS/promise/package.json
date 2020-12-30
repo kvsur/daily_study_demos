@@ -1,0 +1,9 @@
+{
+  "scripts": {
+    "build": "tsc",
+    "test": "build && node"
+  },
+  "dependencies": {
+    "typescript": "^4.1.3"
+  }
+}

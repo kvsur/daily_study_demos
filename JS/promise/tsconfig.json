@@ -1,0 +1,11 @@
+{
+    "compilerOptions": {
+        "target": "ES5",
+        "module": "CommonJS",
+        "lib": ["DOM", "ES2015", "ES2018.Promise", "ES2020.Promise", "ESNext.Promise"],
+        "outDir": "dist",
+        "downlevelIteration": true
+    },
+    "include": ["src/**/*"],
+    "exclude": ["node_modules"]
+}
