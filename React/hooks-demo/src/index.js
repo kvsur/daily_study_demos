@@ -1,28 +1,52 @@
-import React, { useState, useEffect } from 'react';
+import React, { Component } from 'react';
 
-import ReactDom from 'react-dom';
+export default class App extends Component {
+    state = {
+        count: 0,
+        count2: 0
+    };
 
-function IncreasingTodoList() {
-    const [count, setCount] = useState(0);
+    componentDidUpdate() {
+        console.log('component did update');
+    }
 
-    useEffect(() => {
-        if (count === 0 ) return;
-        const todoList = document.getElementById('todoList');
-        const newItem = document.createElement('li');
-        newItem.setAttribute('class', 'todo-list-item');
+    increment = () => {
+        console.log('increment setState 前的 count:', this.state.count);
+        this.setState({
+            count: this.state.count + 1
+        });
+        console.log('increment setState 后的 count:', this.state.count);
+    }
+    
+    triple = () => {
+        console.log('triple setState 前的 count:', this.state.count);
+        this.setState({ count: this.state.count + 1 });
+        this.setState({ count: this.state.count + 2 });
+        this.setState({ count2: this.state.count + 3, count: this.state.count + 4 });
+        console.log('triple setState 后的 count:', this.state.count);
+    }
 
-        newItem.innerHTML = `我是第${count}个待办事项`;
-        todoList.appendChild(newItem);
-    }, [count]);
+    reduce = () => {
+        setTimeout(() => {
+            console.log('reduce setState 前的 count:', this.state.count);
+            // 以下的for 循环方式会触发 100 次更新，componentDidUpdate 会执行 一百次
+            for(let i = 0; i < 100; i++) {
+                this.setState({
+                    count: this.state.count - 1
+                });
+            }
+            console.log('reduce setState 后的 count:', this.state.count);
+        }, 0);
+    }
 
-    return (
-        <div>
-            <p>当前共计{count}个待办事项</p>
-            <ul id='todoList'></ul>
-            <button onClick={() => setCount(count+1)}>点我新增待办事项</button>
-        </div>
-    );
+
+    render() {
+        return (
+            <div>
+                <button onClick={this.increment}>+1</button>
+                <button onClick={this.triple}>+3</button>
+                <button onClick={this.reduce}>-1</button>
+            </div>
+        )
+    }
 }
-
-
-ReactDom.render(<IncreasingTodoList />, document.getElementById('root'));

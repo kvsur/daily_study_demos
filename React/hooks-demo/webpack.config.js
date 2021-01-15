@@ -7,7 +7,7 @@ const distPath = path.resolve(__dirname, 'dist/');
 module.exports = {
     mode: 'production',
     entry: {
-        app: path.resolve(__dirname, 'src/index.js')
+        app: path.resolve(__dirname, 'src/main.js')
     },
     output: {
         path: distPath,

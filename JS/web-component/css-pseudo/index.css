@@ -1,0 +1,11 @@
+p {
+    background-color: yellow;
+}
+
+simple-custom {
+    background-color: cyan;
+}
+
+simple-custom:defined {
+    font-style: italic;
+}

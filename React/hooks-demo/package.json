@@ -20,6 +20,7 @@
     "webpack-merge": "^5.7.3"
   },
   "dependencies": {
+    "@babel/plugin-proposal-class-properties": "^7.12.1",
     "react": "^17.0.1",
     "react-dom": "^17.0.1"
   }
