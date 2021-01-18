@@ -1,0 +1,2 @@
+;
+// interface TupleType2 [];
