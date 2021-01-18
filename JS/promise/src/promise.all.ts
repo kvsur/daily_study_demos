@@ -1,15 +1,16 @@
-Promise.all = function(values: IterableIterator<any>):Promise<any[]> {
-    return new Promise((resolve, reject) => {
-        try {
-            if (!values[Symbol.iterator]) throw new TypeError();
-        } catch (e) {
-            reject(new TypeError(`${typeof values} is not iterable (cannot read property Symbol(Symbol.iterator))`));
-        }
+import {isNative, macroTask} from './utils';
 
-        const results = <any>[];
+function promiseAll(values) {
+    return new Promise((resolve, reject) => {
+
+        if (!isNative(values[Symbol.iterator]))
+            return reject(new TypeError(`${typeof values} is not iterable (cannot read property Symbol(Symbol.iterator))`));
+
+        const results = [];
         let haveAnyReject = false;
 
         for (let item of values) {
+            // 如果在结束循环之前的其中任何一个触发了reject 则break；
             if (haveAnyReject) break;
             try {
                 item.then(res => results.push(res)).catch(reason => {
@@ -17,14 +18,13 @@ Promise.all = function(values: IterableIterator<any>):Promise<any[]> {
                     reject(reason);
                 });
             } catch (err) {
-                if (Object.is(err, NaN)) break;
-                else results.push(item);
+                Promise.resolve().then(() => { results.push(item) });
             }
         }
 
-        setTimeout(resolve, 0, results);
+        // setTimeout(resolve, 0, results);
         // queueMicrotask(() => resolve(results));
+
+        !haveAnyReject && macroTask(() => resolve(results));
     });
 }
-
-Promise.all([1,2,3, new Promise((_, rej) => rej('test'))]).then(res => console.log(res)).catch(reason => console.log('catch', reason));
