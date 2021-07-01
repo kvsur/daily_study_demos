@@ -2,9 +2,10 @@ const path = require('path');
 const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 
-module.exports = {
+/** @type {import('webpack').Configuration} */
+const webpackConfig = {
     mode: 'development',
-    entry: './dynamic_import/index.js',
+    entry: './src/index.js',
     output: {
         path: path.resolve(__dirname, './build'),
         filename: '[name].[hash:4].js',
@@ -26,4 +27,6 @@ module.exports = {
             publicPath: './'
         })
     ]
-};
+}
+
+module.exports = webpackConfig;
