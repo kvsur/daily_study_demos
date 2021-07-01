@@ -1,10 +1,9 @@
-Promise.allSettled = function(values: IterableIterator<any>): Promise<any[]> {
+import { isNative, macroTask } from "./utils";
+
+function promiseAllSellted(values) {
     return new Promise((resolve, reject) => {
-        try {
-            if (!values[Symbol.iterator]) throw new TypeError();
-        } catch (e) {
-            reject(new TypeError(`${typeof values} is not iterable (cannot read property Symbol(Symbol.iterator))`));
-        }
+        if (!isNative(values[Symbol.iterator]))
+            return reject(new TypeError(`${typeof values} is not iterable (cannot read property Symbol(Symbol.iterator))`));
 
         const results = [];
 
@@ -12,12 +11,11 @@ Promise.allSettled = function(values: IterableIterator<any>): Promise<any[]> {
             try {
                 item.then(res => results.push(res)).catch(reason => results.push(reason));
             } catch (err) {
-                results.push(item);
+                Promise.resolve().then(() => { results.push(item) });
             }
         }
 
-        setTimeout(resolve, 0, results);
-    })
+        macroTask(() => resolve(results));
+        
+    });
 }
-
-Promise.allSettled([]).then(res => console.log(res)).catch(reason => console.error(reason));

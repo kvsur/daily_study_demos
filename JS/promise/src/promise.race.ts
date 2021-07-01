@@ -1,10 +1,9 @@
-Promise.race = function(values) {
+import { isNative } from "./utils";
+
+function promiseRace(values) {
     return new Promise((resolve, reject) => {
-        try {
-            if (!values[Symbol.iterator]) throw new TypeError();
-        } catch (e) {
-            reject(new TypeError(`${typeof values} is not iterable (cannot read property Symbol(Symbol.iterator))`));
-        }
+        if (!isNative(values[Symbol.iterator]))
+            return reject(new TypeError(`${typeof values} is not iterable (cannot read property Symbol(Symbol.iterator))`));
 
         for(let item of values) {
             try {
@@ -13,5 +12,6 @@ Promise.race = function(values) {
                 Promise.resolve().then(() => resolve(item));
             }
         }
-    })
+        
+    });
 }

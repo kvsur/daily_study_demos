@@ -1,0 +1,46 @@
+body{
+    margin: 0;
+    background: #fefefe;
+}
+.wrap{
+    width: 100vw;
+    overflow: hidden;
+    box-shadow: 0 0 5px 0 rgba(0,0,0,0.1);
+    position: relative;
+    background: #000;
+}
+ul{
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+.list{
+    display: flex;
+    float: left;
+}
+.list img{
+    width: 100vw;
+    vertical-align: top;
+    filter: saturate(2);
+}
+
+.dot{
+    width: 100vw;
+    display: flex;
+    justify-content: center;
+    position: absolute;
+    bottom: 20px;
+}
+.dot li{
+    width: 10px;
+    height: 10px;
+    border-radius: 10px;
+    background: #fff;
+    margin: 0 5px;
+    transition: 0.2s;
+    box-shadow: 0 0 3px 0 rgba(0,0,0,0.3);
+}
+
+.dot li.active{
+    width: 20px;
+}

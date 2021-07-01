@@ -12,9 +12,9 @@ interface NumberArray {
 let arr:NumberArray = [3,3,'3',[3],3,3,3,3,3,3]
 
 interface IArguments {
-    length: number;
+    // length: number;
     callee: Function;
-    [index: number]: any;
+    // [x: number]: any;
 };
 
 function arraySum() {
